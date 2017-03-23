@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<robot name="visual">
+
+  <material name="gray">
+    <color rgba="0.3 0.3 0.3 1"/>
+  </material>
+  <material name="orange">
+    <color rgba="0.8 0.084 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="0.8 0.8 0.8 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.15 0.15 .05"/>
+      </geometry>
+      <material name="gray"/> 
+      <origin rpy="0 0 0" xyz="0 0 -0.025"/>
+    </visual>
+  </link>
+
+  <link name="link1">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/base.stl"/>
+      </geometry>
+      <material name="orange"/> 
+    </visual>
+  </link>
+
+  <link name="link2">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/shoulder.stl"/>
+      </geometry>
+      <material name="orange"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.0505"/> 
+    </visual>
+  </link>
+
+  <link name="link3">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/elbow.stl"/>
+      </geometry>
+      <material name="orange"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.1705"/> 
+    </visual>
+  </link>
+
+  <link name="link4">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/wrist_pitch.stl"/>
+      </geometry>
+      <material name="orange"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.2905"/> 
+    </visual>
+  </link>
+  
+  <link name="link5">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/wrist_roll.stl"/>
+      </geometry>
+      <material name="white"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.3505"/> 
+    </visual>
+  </link>
+
+  <link name="gripper_base">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/gripper_base.stl"/>
+      </geometry>
+      <material name="white"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.357"/> 
+    </visual>
+  </link>
+
+  <link name="gripper_left">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/gripper_left.stl"/>
+      </geometry>
+      <material name="white"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.4"/> 
+    </visual>
+  </link>
+
+  <link name="gripper_right">
+    <visual>
+      <geometry>
+        <mesh filename="package://braccio_description/meshes/gripper_right.stl"/>
+      </geometry>
+      <material name="white"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.4"/> 
+    </visual>
+  </link>
+
+  <joint name="base" type="revolute">
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000.0" lower="0.0" upper="3.141592653589793" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link1"/>
+  </joint>
+
+  <joint name="shoulder" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="0.2617993877991494" upper="2.8797932657906435" velocity="0.5"/>
+    <origin rpy="-1.5707963267948966 0 0" xyz="0 0 0.0505"/>   
+    <parent link="link1"/>
+    <child link="link2"/>
+  </joint>
+
+   <joint name="elbow" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="0" upper="3.141592653589793" velocity="0.5"/>
+    <origin rpy="-1.5707963267948966 0 0" xyz="0 0 0.1205"/>
+    <parent link="link2"/>
+    <child link="link3"/>
+  </joint>
+
+  <joint name="wrist_pitch" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="0" upper="3.141592653589793" velocity="0.5"/>
+    <origin rpy="-1.5707963267948966 0 0" xyz="0 0 0.1205"/>
+    <parent link="link3"/>
+    <child link="link4"/>
+  </joint>
+
+  <joint name="wrist_roll" type="revolute">
+    <axis xyz="0 0 -1"/>
+    <limit effort="1000.0" lower="0.0" upper="3.141592653589793" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 0.0 0.06"/>
+    <parent link="link4"/>
+    <child link="link5"/>
+  </joint>
+
+  <joint name="gripper_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 0.0065"/>
+    <parent link="link5"/>
+    <child link="gripper_base"/>
+  </joint>
+
+  <joint name="gripper_left" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 0.043"/>
+    <parent link="gripper_base"/>
+    <child link="gripper_left"/>
+  </joint>
+
+  <joint name="gripper_right" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 0.043"/>
+    <parent link="gripper_base"/>
+    <child link="gripper_right"/>
+  </joint>
+  
+</robot>
