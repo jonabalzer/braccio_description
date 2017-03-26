@@ -7,5 +7,6 @@
   <license>MIT</license>
   <url type="repository">https://github.com/jonabalzer/braccio_description</url>
   <author email="jonathan.balzer@vathos.net">Jonathan Balzer</author>
+  <buildtool_depend>catkin</buildtool_depend>
   <export></export>
 </package>
